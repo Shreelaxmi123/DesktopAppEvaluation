@@ -2,18 +2,6 @@
 Partial Class CreateSubmissionForm
     Inherits System.Windows.Forms.Form
 
-    'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
-    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-        Try
-            If disposing AndAlso components IsNot Nothing Then
-                components.Dispose()
-            End If
-        Finally
-            MyBase.Dispose(disposing)
-        End Try
-    End Sub
-
     'Required by the Windows Form Designer
     Private components As System.ComponentModel.IContainer
 
@@ -22,162 +10,128 @@ Partial Class CreateSubmissionForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnStartStopwatch = New System.Windows.Forms.Button()
+        Me.btnSubmit = New System.Windows.Forms.Button()
+        Me.txtNameInput = New System.Windows.Forms.TextBox()
+        Me.txtEmailInput = New System.Windows.Forms.TextBox()
+        Me.txtPhoneNumberInput = New System.Windows.Forms.TextBox()
+        Me.txtGitHubLinkInput = New System.Windows.Forms.TextBox()
         Me.lblName = New System.Windows.Forms.Label()
         Me.lblEmail = New System.Windows.Forms.Label()
-        Me.lblPhone = New System.Windows.Forms.Label()
-        Me.lblGit = New System.Windows.Forms.Label()
-        Me.txtName = New System.Windows.Forms.TextBox()
-        Me.txtEmail = New System.Windows.Forms.TextBox()
-        Me.txtPhone = New System.Windows.Forms.TextBox()
-        Me.txtGit = New System.Windows.Forms.TextBox()
-        Me.btnToggleStopwatch = New System.Windows.Forms.Button()
-        Me.btnStopStopwatch = New System.Windows.Forms.Button()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
-        Me.btnSubmit = New System.Windows.Forms.Button()
+        Me.lblPhoneNumber = New System.Windows.Forms.Label()
+        Me.lblGitHubLink = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'Label1
+        'btnStartStopwatch
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(31, 20)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(329, 20)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "John Doe, Slidely Task 2 - Create Submission"
+        Me.btnStartStopwatch.Location = New System.Drawing.Point(12, 12)
+        Me.btnStartStopwatch.Name = "btnStartStopwatch"
+        Me.btnStartStopwatch.Size = New System.Drawing.Size(75, 23)
+        Me.btnStartStopwatch.TabIndex = 0
+        Me.btnStartStopwatch.Text = "Start"
+        Me.btnStartStopwatch.UseVisualStyleBackColor = True
+        '
+        'btnSubmit
+        '
+        Me.btnSubmit.Location = New System.Drawing.Point(12, 150)
+        Me.btnSubmit.Name = "btnSubmit"
+        Me.btnSubmit.Size = New System.Drawing.Size(75, 23)
+        Me.btnSubmit.TabIndex = 1
+        Me.btnSubmit.Text = "Submit"
+        Me.btnSubmit.UseVisualStyleBackColor = True
+        '
+        'txtNameInput
+        '
+        Me.txtNameInput.Location = New System.Drawing.Point(100, 50)
+        Me.txtNameInput.Name = "txtNameInput"
+        Me.txtNameInput.Size = New System.Drawing.Size(200, 20)
+        Me.txtNameInput.TabIndex = 2
+        '
+        'txtEmailInput
+        '
+        Me.txtEmailInput.Location = New System.Drawing.Point(100, 76)
+        Me.txtEmailInput.Name = "txtEmailInput"
+        Me.txtEmailInput.Size = New System.Drawing.Size(200, 20)
+        Me.txtEmailInput.TabIndex = 3
+        '
+        'txtPhoneNumberInput
+        '
+        Me.txtPhoneNumberInput.Location = New System.Drawing.Point(100, 102)
+        Me.txtPhoneNumberInput.Name = "txtPhoneNumberInput"
+        Me.txtPhoneNumberInput.Size = New System.Drawing.Size(200, 20)
+        Me.txtPhoneNumberInput.TabIndex = 4
+        '
+        'txtGitHubLinkInput
+        '
+        Me.txtGitHubLinkInput.Location = New System.Drawing.Point(100, 128)
+        Me.txtGitHubLinkInput.Name = "txtGitHubLinkInput"
+        Me.txtGitHubLinkInput.Size = New System.Drawing.Size(200, 20)
+        Me.txtGitHubLinkInput.TabIndex = 5
         '
         'lblName
         '
         Me.lblName.AutoSize = True
-        Me.lblName.Location = New System.Drawing.Point(40, 64)
+        Me.lblName.Location = New System.Drawing.Point(12, 53)
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(51, 20)
-        Me.lblName.TabIndex = 1
-        Me.lblName.Text = "Name"
+        Me.lblName.Size = New System.Drawing.Size(38, 13)
+        Me.lblName.TabIndex = 6
+        Me.lblName.Text = "Name:"
         '
         'lblEmail
         '
         Me.lblEmail.AutoSize = True
-        Me.lblEmail.Location = New System.Drawing.Point(40, 104)
+        Me.lblEmail.Location = New System.Drawing.Point(12, 79)
         Me.lblEmail.Name = "lblEmail"
-        Me.lblEmail.Size = New System.Drawing.Size(48, 20)
-        Me.lblEmail.TabIndex = 2
-        Me.lblEmail.Text = "Email"
+        Me.lblEmail.Size = New System.Drawing.Size(35, 13)
+        Me.lblEmail.TabIndex = 7
+        Me.lblEmail.Text = "Email:"
         '
-        'lblPhone
+        'lblPhoneNumber
         '
-        Me.lblPhone.AutoSize = True
-        Me.lblPhone.Location = New System.Drawing.Point(40, 147)
-        Me.lblPhone.Name = "lblPhone"
-        Me.lblPhone.Size = New System.Drawing.Size(92, 20)
-        Me.lblPhone.TabIndex = 3
-        Me.lblPhone.Text = "Phone Num"
+        Me.lblPhoneNumber.AutoSize = True
+        Me.lblPhoneNumber.Location = New System.Drawing.Point(12, 105)
+        Me.lblPhoneNumber.Name = "lblPhoneNumber"
+        Me.lblPhoneNumber.Size = New System.Drawing.Size(81, 13)
+        Me.lblPhoneNumber.TabIndex = 8
+        Me.lblPhoneNumber.Text = "Phone Number:"
         '
-        'lblGit
+        'lblGitHubLink
         '
-        Me.lblGit.AutoSize = True
-        Me.lblGit.Location = New System.Drawing.Point(40, 193)
-        Me.lblGit.Name = "lblGit"
-        Me.lblGit.Size = New System.Drawing.Size(169, 20)
-        Me.lblGit.TabIndex = 4
-        Me.lblGit.Text = "Github Link For Task 2"
-        '
-        'txtName
-        '
-        Me.txtName.Location = New System.Drawing.Point(288, 64)
-        Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(248, 26)
-        Me.txtName.TabIndex = 5
-        '
-        'txtEmail
-        '
-        Me.txtEmail.Location = New System.Drawing.Point(288, 104)
-        Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(248, 26)
-        Me.txtEmail.TabIndex = 6
-        '
-        'txtPhone
-        '
-        Me.txtPhone.Location = New System.Drawing.Point(288, 147)
-        Me.txtPhone.Name = "txtPhone"
-        Me.txtPhone.Size = New System.Drawing.Size(248, 26)
-        Me.txtPhone.TabIndex = 7
-        '
-        'txtGit
-        '
-        Me.txtGit.Location = New System.Drawing.Point(288, 193)
-        Me.txtGit.Name = "txtGit"
-        Me.txtGit.Size = New System.Drawing.Size(248, 26)
-        Me.txtGit.TabIndex = 8
-        '
-        'btnToggleStopwatch
-        '
-        Me.btnToggleStopwatch.Location = New System.Drawing.Point(35, 264)
-        Me.btnToggleStopwatch.Name = "btnToggleStopwatch"
-        Me.btnToggleStopwatch.Size = New System.Drawing.Size(316, 35)
-        Me.btnToggleStopwatch.TabIndex = 9
-        Me.btnToggleStopwatch.Text = "TOGGLE STOP WATCH (CTRL +T)"
-        Me.btnToggleStopwatch.UseVisualStyleBackColor = True
-        '
-        'btnStopStopwatch
-        '
-        Me.btnStopStopwatch.Location = New System.Drawing.Point(376, 264)
-        Me.btnStopStopwatch.Name = "btnStopStopwatch"
-        Me.btnStopStopwatch.Size = New System.Drawing.Size(160, 35)
-        Me.btnStopStopwatch.TabIndex = 10
-        Me.btnStopStopwatch.UseVisualStyleBackColor = True
-        '
-        'Timer2
-        '
-        Me.Timer2.Interval = 1000
-        '
-        'btnSubmit
-        '
-        Me.btnSubmit.Location = New System.Drawing.Point(35, 338)
-        Me.btnSubmit.Name = "btnSubmit"
-        Me.btnSubmit.Size = New System.Drawing.Size(501, 47)
-        Me.btnSubmit.TabIndex = 11
-        Me.btnSubmit.Text = "SUBMIT (CTRL + S)"
-        Me.btnSubmit.UseVisualStyleBackColor = True
+        Me.lblGitHubLink.AutoSize = True
+        Me.lblGitHubLink.Location = New System.Drawing.Point(12, 131)
+        Me.lblGitHubLink.Name = "lblGitHubLink"
+        Me.lblGitHubLink.Size = New System.Drawing.Size(68, 13)
+        Me.lblGitHubLink.TabIndex = 9
+        Me.lblGitHubLink.Text = "GitHub Link:"
         '
         'CreateSubmissionForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Controls.Add(Me.btnSubmit)
-        Me.Controls.Add(Me.btnStopStopwatch)
-        Me.Controls.Add(Me.btnToggleStopwatch)
-        Me.Controls.Add(Me.txtGit)
-        Me.Controls.Add(Me.txtPhone)
-        Me.Controls.Add(Me.txtEmail)
-        Me.Controls.Add(Me.txtName)
-        Me.Controls.Add(Me.lblGit)
-        Me.Controls.Add(Me.lblPhone)
+        Me.ClientSize = New System.Drawing.Size(320, 200)
+        Me.Controls.Add(Me.lblGitHubLink)
+        Me.Controls.Add(Me.lblPhoneNumber)
         Me.Controls.Add(Me.lblEmail)
         Me.Controls.Add(Me.lblName)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.txtGitHubLinkInput)
+        Me.Controls.Add(Me.txtPhoneNumberInput)
+        Me.Controls.Add(Me.txtEmailInput)
+        Me.Controls.Add(Me.txtNameInput)
+        Me.Controls.Add(Me.btnSubmit)
+        Me.Controls.Add(Me.btnStartStopwatch)
         Me.Name = "CreateSubmissionForm"
-        Me.Text = "Name"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents Label1 As Label
+    Friend WithEvents btnStartStopwatch As Button
+    Friend WithEvents btnSubmit As Button
+    Friend WithEvents txtNameInput As TextBox
+    Friend WithEvents txtEmailInput As TextBox
+    Friend WithEvents txtPhoneNumberInput As TextBox
+    Friend WithEvents txtGitHubLinkInput As TextBox
     Friend WithEvents lblName As Label
     Friend WithEvents lblEmail As Label
-    Friend WithEvents lblPhone As Label
-    Friend WithEvents lblGit As Label
-    Friend WithEvents txtName As TextBox
-    Friend WithEvents txtEmail As TextBox
-    Friend WithEvents txtPhone As TextBox
-    Friend WithEvents txtGit As TextBox
-    Friend WithEvents btnToggleStopwatch As Button
-    Friend WithEvents btnStopStopwatch As Button
-    Friend WithEvents Timer1 As Timer
-    Friend WithEvents Timer2 As Timer
-    Friend WithEvents btnSubmit As Button
+    Friend WithEvents lblPhoneNumber As Label
+    Friend WithEvents lblGitHubLink As Label
+
 End Class

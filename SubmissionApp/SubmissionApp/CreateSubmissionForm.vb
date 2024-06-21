@@ -1,102 +1,72 @@
-﻿Public Class CreateSubmissionForm
-    Private stopwatchRunning As Boolean = False
-    Private stopwatchTime As TimeSpan = TimeSpan.Zero
-    Private pauseTime As TimeSpan = TimeSpan.Zero ' Store the pause time
+﻿Imports System.Net.Http
+Imports System.Text
+Imports Newtonsoft.Json
 
-    Private Sub CreateSubmissionForm_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-        If e.Control AndAlso e.KeyCode = Keys.T Then
-            ' Ctrl + T for toggling the stopwatch
-            btnToggleStopwatch.PerformClick()
-        ElseIf e.Control AndAlso e.KeyCode = Keys.S Then
-            ' Ctrl + S for submitting the form
-            btnSubmit.PerformClick()
-        End If
-        If e.Control AndAlso e.KeyCode = Keys.S Then
-            ' Ctrl + S for submitting the form
-            btnSubmit.PerformClick()
-        End If
-    End Sub
-
-    Private Sub btnToggleStopwatch_Click(sender As Object, e As EventArgs) Handles btnToggleStopwatch.Click
-        If stopwatchRunning Then
-            ' If stopwatch is running, pause it
-            stopwatchRunning = False
-            pauseTime = stopwatchTime ' Store the pause time
-            btnToggleStopwatch.Text = "Start"
-            ' Stop the stopwatch logic here
-            ' For example, if using a Timer control named timerStopwatch, you would stop it like this:
-            ' timerStopwatch.Stop()
-        Else
-            ' If stopwatch is not running, start it or resume from pause
-            If pauseTime > TimeSpan.Zero Then
-                ' Resuming from pause
-                stopwatchTime = pauseTime
-            Else
-                ' Starting the stopwatch
-                stopwatchTime = TimeSpan.Zero
-            End If
-            stopwatchRunning = True
-            btnToggleStopwatch.Text = "Stop"
-            ' Start the stopwatch logic here
-            ' For example, if using a Timer control named timerStopwatch, you would start it like this:
-            ' timerStopwatch.Start()
-        End If
-    End Sub
-
-    Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
-        ' Validate form fields here if needed
-        If txtName.Text = "" OrElse txtEmail.Text = "" OrElse txtPhone.Text = "" OrElse txtGit.Text = "" Then
-            MessageBox.Show("Please fill in all fields.")
-            Return
-        End If
-
-        ' Submit form details to backend
-        ' Add your submission logic here
-        ' For example, you might send the form data to a server or save it to a database
-
-        MessageBox.Show("Form submitted successfully.")
-
-        ' Clear form fields after submission if needed
-        txtName.Text = ""
-        txtEmail.Text = ""
-        txtPhone.Text = ""
-        txtGit.Text = ""
-    End Sub
-
-    Private Sub lblName_Click(sender As Object, e As EventArgs) Handles lblName.Click
-        ' Event handler for label click
-    End Sub
-
-    Private Sub lblEmail_Click(sender As Object, e As EventArgs) Handles lblEmail.Click
-        ' Event handler for label click
-    End Sub
-
-    Private Sub txtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
-        ' Event handler for text changed
-    End Sub
-
-    Private Sub txtEmail_TextChanged(sender As Object, e As EventArgs) Handles txtEmail.TextChanged
-        ' Event handler for text changed
-    End Sub
-
-    Private Sub txtPhone_TextChanged(sender As Object, e As EventArgs) Handles txtPhone.TextChanged
-        ' Event handler for text changed
-    End Sub
-
-    Private Sub txtGit_TextChanged(sender As Object, e As EventArgs) Handles txtGit.TextChanged
-        ' Event handler for text changed
-    End Sub
-
-    Private Sub lblPhone_Click(sender As Object, e As EventArgs) Handles lblPhone.Click
-
-    End Sub
+Public Class CreateSubmissionForm
+    Private stopwatch As New Stopwatch()
 
     Private Sub CreateSubmissionForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        btnToggleStopwatch.BackColor = Color.LightYellow
-        btnSubmit.BackColor = Color.SkyBlue
+        ' Initialize and layout controls
+        InitializeControls()
     End Sub
 
-    Private Sub lblGit_Click(sender As Object, e As EventArgs) Handles lblGit.Click
-
+    Private Sub InitializeControls()
+        ' This method is no longer necessary if the controls are already defined in the designer file
     End Sub
+
+    Private Sub btnStartStopwatch_Click(sender As Object, e As EventArgs) Handles btnStartStopwatch.Click
+        If stopwatch.IsRunning Then
+            stopwatch.Stop()
+            btnStartStopwatch.Text = "Resume"
+        Else
+            stopwatch.Start()
+            btnStartStopwatch.Text = "Pause"
+        End If
+    End Sub
+
+    Private Async Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
+        ' Collect submission data
+        Dim submissionData As New Dictionary(Of String, String)()
+        submissionData("name") = txtNameInput.Text
+        submissionData("email") = txtEmailInput.Text
+        submissionData("phone") = txtPhoneNumberInput.Text
+        submissionData("github_link") = txtGitHubLinkInput.Text
+        submissionData("stopwatch_time") = stopwatch.Elapsed.ToString()
+
+        ' Convert the data to JSON
+        Dim json As String = JsonConvert.SerializeObject(submissionData)
+        Dim content As New StringContent(json, Encoding.UTF8, "application/json")
+
+        ' Send the JSON data to the backend
+        Using client As New HttpClient()
+            Try
+                Dim response As HttpResponseMessage = Await client.PostAsync("http://localhost:3000/submit", content)
+                response.EnsureSuccessStatusCode()
+                Dim responseContent As String = Await response.Content.ReadAsStringAsync()
+
+                MessageBox.Show("Submission successful! Response: " & responseContent)
+                ClearForm()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred: " & ex.Message)
+            End Try
+        End Using
+    End Sub
+
+    Private Sub ClearForm()
+        ' Clear all input fields and reset stopwatch
+        txtNameInput.Clear()
+        txtEmailInput.Clear()
+        txtPhoneNumberInput.Clear()
+        txtGitHubLinkInput.Clear()
+        stopwatch.Reset()
+        btnStartStopwatch.Text = "Start"
+    End Sub
+
+    Private Sub CreateSubmissionForm_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.Control AndAlso e.KeyCode = Keys.S Then
+            btnSubmit.PerformClick()
+        End If
+    End Sub
+
+    ' Form controls are already defined in the designer file
 End Class
